@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useRef } from 'react';
 import { supabase } from '../lib/supabase';
+import { compressImage, formatFileSize } from '../utils/compressImage';
 import { StatusIcons, ActionIcons, ImageIcon } from './Icons';
 
 export default function ClassImageUploader({
@@ -54,18 +55,28 @@ export default function ClassImageUploader({
       setUploading(true);
       setError('');
 
-      const fileExt = file.name.split('.').pop().toLowerCase();
+      console.log('Original size:', formatFileSize(file.size));
+
+      const compressed = await compressImage(file, {
+        maxWidth: 1200,
+        maxHeight: 1200,
+        quality: 0.8,
+        maxSizeKB: 800,
+      });
+
+      console.log('Compressed size:', formatFileSize(compressed.size));
+
       const timestamp = Date.now();
-      const fileName = `${userId}/${gymId}/classes/${classId}_${timestamp}.${fileExt}`;
+      const fileName = `${userId}/${gymId}/classes/${classId}_${timestamp}.jpg`;
 
       console.log('Uploading class image:', fileName);
 
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('gym-images')
-        .upload(fileName, file, {
+        .upload(fileName, compressed, {
           cacheControl: '3600',
           upsert: false,
-          contentType: file.type,
+          contentType: 'image/jpeg',
         });
 
       if (uploadError) {

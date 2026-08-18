@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
+import { compressImage, formatFileSize } from '../utils/compressImage';
 import {
   UploadIcon,
   ImageIcon,
@@ -48,14 +49,25 @@ export default function ImageUploader({
         throw new Error('Image must be less than 5MB');
       }
 
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${userId}/${gymId}/${isCover ? 'cover' : Date.now()}.${fileExt}`;
+      console.log('Original size:', formatFileSize(file.size));
+
+      const compressed = await compressImage(file, {
+        maxWidth: 1200,
+        maxHeight: 1200,
+        quality: 0.8,
+        maxSizeKB: 800,
+      });
+
+      console.log('Compressed size:', formatFileSize(compressed.size));
+
+      const fileName = `${userId}/${gymId}/${isCover ? 'cover' : Date.now()}.jpg`;
 
       const { error: uploadError } = await supabase.storage
         .from('gym-images')
-        .upload(fileName, file, {
+        .upload(fileName, compressed, {
           cacheControl: '3600',
           upsert: isCover,
+          contentType: 'image/jpeg',
         });
 
       if (uploadError) throw uploadError;

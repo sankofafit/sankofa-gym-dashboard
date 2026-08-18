@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from './lib/supabase';
+import { logActivity, LOG_ACTIONS } from './utils/activityLogger';
 import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
@@ -34,15 +35,18 @@ export default function App() {
       if (error || !data) {
         console.log('No gym found for this user');
         setGym(null);
-        return;
+        return null;
       }
 
-      setGym({
+      const normalized = {
         ...data,
         is_approved: data.is_approved === true || data.is_approved === 'true',
-      });
+      };
+      setGym(normalized);
+      return normalized;
     } catch (e) {
       console.log('loadGym error:', e);
+      return null;
     } finally {
       setLoading(false);
     }
@@ -60,11 +64,23 @@ export default function App() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    } = supabase.auth.onAuthStateChange(async (_event, nextSession) => {
       setSession(nextSession);
       if (nextSession?.user?.id) {
         setLoading(true);
-        loadGym(nextSession.user.id);
+        const gymData = await loadGym(nextSession.user.id);
+        if (_event === 'SIGNED_IN' && gymData) {
+          await logActivity({
+            actorId: nextSession.user.id,
+            actorEmail: nextSession.user.email,
+            actorName: gymData.name,
+            actorType: 'gym',
+            action: LOG_ACTIONS.AUTH_LOGIN,
+            category: 'auth',
+            description: 'Gym owner logged in',
+            metadata: { gym_id: gymData.id },
+          });
+        }
       } else {
         setGym(null);
         setLoading(false);
