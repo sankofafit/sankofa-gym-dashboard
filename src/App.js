@@ -29,16 +29,18 @@ export default function App() {
       console.log('Gym data:', data);
       console.log('Gym error:', error);
       console.log('Is approved:', data?.is_approved);
+      console.log('Gym for user:', data?.name);
 
-      if (error) {
-        console.log('No gym found for user');
+      if (error || !data) {
+        console.log('No gym found for this user');
         setGym(null);
-      } else {
-        setGym({
-          ...data,
-          is_approved: data.is_approved === true || data.is_approved === 'true',
-        });
+        return;
       }
+
+      setGym({
+        ...data,
+        is_approved: data.is_approved === true || data.is_approved === 'true',
+      });
     } catch (e) {
       console.log('loadGym error:', e);
     } finally {

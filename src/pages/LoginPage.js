@@ -21,53 +21,90 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setSuccess('');
 
     try {
-      if (isSignUp) {
-        if (!gymName.trim()) {
-          throw new Error('Please enter your gym name');
-        }
-
-        const { data, error: signUpError } = await supabase.auth.signUp({
-          email,
-          password,
-        });
-
-        if (signUpError) throw signUpError;
-
-        if (data.user) {
-          const { error: gymError } = await supabase.from('gyms').insert({
-            owner_id: data.user.id,
-            name: gymName.trim(),
-            email,
-            phone,
-            city,
-            is_approved: false,
-            is_active: true,
-          });
-
-          if (gymError) console.log('Gym create error:', gymError);
-        }
-
-        setSuccess(
-          'Account created successfully! Check your email to verify your account. Your gym will be reviewed by Sankofa Fit admin within 24-48 hours before going live.'
-        );
-      } else {
-        const { error: signInError } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-        if (signInError) throw signInError;
+      if (!gymName.trim()) {
+        throw new Error('Please enter your gym name');
       }
+
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (authError) throw authError;
+
+      const userId = authData.user?.id;
+      if (!userId) {
+        throw new Error('Account creation failed');
+      }
+
+      console.log('New gym owner ID:', userId);
+
+      const { data: gymData, error: gymError } = await supabase
+        .from('gyms')
+        .insert({
+          name: gymName.trim(),
+          owner_id: userId,
+          city: city || 'Accra',
+          email,
+          phone,
+          is_approved: false,
+          is_active: true,
+          created_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+
+      if (gymError) throw gymError;
+
+      console.log('Gym created:', gymData);
+
+      setSuccess(
+        'Registration successful! Your gym is under review. Admin will approve it within 24 hours.',
+      );
+      alert(
+        '✅ Registration successful!\n\n' +
+          'Your gym is under review. ' +
+          'Admin will approve it within 24 hours.',
+      );
+    } catch (err) {
+      console.log('Register error:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (signInError) throw signInError;
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    if (isSignUp) {
+      handleRegister(e);
+    } else {
+      handleLogin(e);
     }
   };
 
