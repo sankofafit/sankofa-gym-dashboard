@@ -17,7 +17,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [gym, setGym] = useState(null);
 
-  const loadGym = async (userId) => {
+  const loadGym = async (userId, { logLogin = false } = {}) => {
     try {
       console.log('Loading gym for user:', userId);
 
@@ -43,6 +43,28 @@ export default function App() {
         is_approved: data.is_approved === true || data.is_approved === 'true',
       };
       setGym(normalized);
+
+      if (logLogin) {
+        const {
+          data: { session: authSession },
+        } = await supabase.auth.getSession();
+
+        await logActivity({
+          actorId: userId,
+          actorEmail: authSession?.user?.email,
+          actorName: data.name,
+          actorType: 'gym',
+          action: LOG_ACTIONS.AUTH_LOGIN,
+          category: 'auth',
+          description: 'Gym owner logged in to dashboard',
+          metadata: {
+            gym_id: data.id,
+            gym_name: data.name,
+          },
+          status: 'success',
+        });
+      }
+
       return normalized;
     } catch (e) {
       console.log('loadGym error:', e);
@@ -68,19 +90,9 @@ export default function App() {
       setSession(nextSession);
       if (nextSession?.user?.id) {
         setLoading(true);
-        const gymData = await loadGym(nextSession.user.id);
-        if (_event === 'SIGNED_IN' && gymData) {
-          await logActivity({
-            actorId: nextSession.user.id,
-            actorEmail: nextSession.user.email,
-            actorName: gymData.name,
-            actorType: 'gym',
-            action: LOG_ACTIONS.AUTH_LOGIN,
-            category: 'auth',
-            description: 'Gym owner logged in',
-            metadata: { gym_id: gymData.id },
-          });
-        }
+        await loadGym(nextSession.user.id, {
+          logLogin: _event === 'SIGNED_IN',
+        });
       } else {
         setGym(null);
         setLoading(false);
