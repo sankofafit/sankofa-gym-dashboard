@@ -11,22 +11,38 @@ export default function BookingsPage({ gym }) {
   const [search, setSearch] = useState('');
 
   const loadBookings = useCallback(async () => {
-    if (!gym?.id) return;
-    const [classRes, memberRes] = await Promise.all([
-      supabase
+    try {
+      if (!gym?.id) return;
+
+      console.log('Loading bookings for gym:', gym.id);
+
+      const { data, error } = await supabase
         .from('gym_bookings')
         .select('*')
         .eq('gym_id', gym.id)
-        .order('created_at', { ascending: false }),
-      supabase
+        .order('created_at', { ascending: false });
+
+      console.log('Bookings:', data?.length);
+      console.log('Error:', error);
+
+      setBookings(data || []);
+
+      const { data: memberData, error: memberError } = await supabase
         .from('gym_memberships')
         .select('*')
         .eq('gym_id', gym.id)
-        .order('created_at', { ascending: false }),
-    ]);
-    setBookings(classRes.data || []);
-    setMemberships(memberRes.data || []);
-    setLoading(false);
+        .order('created_at', { ascending: false });
+
+      if (memberError) {
+        console.log('Memberships error:', memberError);
+      }
+
+      setMemberships(memberData || []);
+    } catch (e) {
+      console.log('loadBookings error:', e);
+    } finally {
+      setLoading(false);
+    }
   }, [gym?.id]);
 
   useEffect(() => {

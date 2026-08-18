@@ -26,25 +26,38 @@ export default function EarningsPage({ gym }) {
   const loadEarnings = useCallback(async () => {
     if (!gym?.id) return;
     try {
-      const [classRes, memberRes] = await Promise.all([
-        supabase
-          .from('gym_bookings')
-          .select('amount_ghs, booking_date, created_at')
-          .eq('gym_id', gym.id),
-        supabase
-          .from('gym_memberships')
-          .select('amount_ghs, start_date, created_at')
-          .eq('gym_id', gym.id),
-      ]);
+      console.log('Loading earnings for gym:', gym.id);
+
+      const { data: bookings, error: bookingsError } = await supabase
+        .from('gym_bookings')
+        .select('*')
+        .eq('gym_id', gym.id)
+        .order('created_at', { ascending: false });
+
+      console.log('Bookings:', bookings?.length);
+      console.log('Error:', bookingsError);
+
+      const classBookings = (bookings || []).filter((b) => b.status !== 'cancelled');
+
+      const { data: memberships, error: membershipsError } = await supabase
+        .from('gym_memberships')
+        .select('amount_ghs, start_date, created_at, status')
+        .eq('gym_id', gym.id);
+
+      if (membershipsError) {
+        console.log('Memberships error:', membershipsError);
+      }
+
+      const activeMemberships = (memberships || []).filter((m) => m.status !== 'cancelled');
 
       const allTransactions = [
-        ...(classRes.data || []).map((b) => ({
+        ...classBookings.map((b) => ({
           amount: b.amount_ghs || 0,
           date: b.booking_date || b.created_at,
           type: 'Class Booking',
           commission: 0.15,
         })),
-        ...(memberRes.data || []).map((m) => ({
+        ...activeMemberships.map((m) => ({
           amount: m.amount_ghs || 0,
           date: m.start_date || m.created_at,
           type: 'Membership',
@@ -109,7 +122,7 @@ export default function EarningsPage({ gym }) {
         })),
       });
     } catch (e) {
-      console.log('Earnings error:', e);
+      console.log('loadEarnings error:', e);
     } finally {
       setLoading(false);
     }

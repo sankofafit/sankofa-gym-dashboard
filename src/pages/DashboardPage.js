@@ -30,8 +30,11 @@ export default function DashboardPage({ gym, loadGym, userId }) {
     gym?.is_approved === false || gym?.is_approved === null;
 
   const loadStats = useCallback(async () => {
-    if (!gym?.id) return;
     try {
+      if (!gym?.id) return;
+
+      console.log('Loading stats for gym:', gym.id);
+
       const today = new Date().toISOString().split('T')[0];
       const weekAgo = new Date();
       weekAgo.setDate(weekAgo.getDate() - 7);
@@ -42,7 +45,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
       const [bookingsRes, membershipsRes, classesRes] = await Promise.all([
         supabase
           .from('gym_bookings')
-          .select('*')
+          .select('amount_ghs, status, booking_date, created_at')
           .eq('gym_id', gym.id)
           .order('created_at', { ascending: false }),
         supabase
@@ -58,18 +61,28 @@ export default function DashboardPage({ gym, loadGym, userId }) {
       ]);
 
       const bookings = bookingsRes.data || [];
+      const activeBookings = bookings.filter((b) => b.status !== 'cancelled');
       const memberships = membershipsRes.data || [];
       const classes = classesRes.data || [];
 
-      const todayBookings = bookings.filter((b) => b.booking_date?.startsWith(today)).length;
+      console.log('Bookings for gym:', bookings.length);
 
-      const weekBookings = bookings.filter((b) => new Date(b.booking_date) >= weekAgo).length;
+      const todayBookings = activeBookings.filter((b) =>
+        b.booking_date?.startsWith(today),
+      ).length;
 
-      const monthRevenue = bookings
+      const weekBookings = activeBookings.filter(
+        (b) => new Date(b.booking_date) >= weekAgo,
+      ).length;
+
+      const monthRevenue = activeBookings
         .filter((b) => new Date(b.booking_date) >= monthStart)
         .reduce((sum, b) => sum + (b.amount_ghs || 0), 0);
 
-      const totalRevenue = bookings.reduce((sum, b) => sum + (b.amount_ghs || 0), 0);
+      const totalRevenue = activeBookings.reduce(
+        (sum, b) => sum + (b.amount_ghs || 0),
+        0,
+      );
 
       const platformEarnings = totalRevenue * 0.15;
       const gymEarnings = totalRevenue * 0.85;
@@ -85,9 +98,9 @@ export default function DashboardPage({ gym, loadGym, userId }) {
         gymEarnings,
       });
 
-      setRecentBookings(bookings.slice(0, 8));
+      setRecentBookings(activeBookings.slice(0, 8));
     } catch (e) {
-      console.log('Dashboard stats error:', e);
+      console.log('loadStats error:', e);
     } finally {
       setLoading(false);
     }
