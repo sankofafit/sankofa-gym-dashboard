@@ -194,7 +194,7 @@ export default function ClassImageUploader({
                 borderRadius: 5,
                 width: 22,
                 height: 22,
-                color: 'white',
+                color: 'var(--text-primary)',
                 fontSize: 12,
                 fontWeight: 900,
                 cursor: 'pointer',
@@ -283,7 +283,7 @@ export default function ClassImageUploader({
                   +
                 </span>
                 <span style={{
-                  color: '#6B7B99',
+                  color: 'var(--text-secondary)',
                   fontSize: 10,
                   textAlign: 'center',
                   lineHeight: 1.3,
@@ -315,7 +315,7 @@ export default function ClassImageUploader({
       />
 
       <div style={{
-        color: '#6B7B99',
+        color: 'var(--text-secondary)',
         fontSize: 11,
         lineHeight: 1.5,
         display: 'flex',

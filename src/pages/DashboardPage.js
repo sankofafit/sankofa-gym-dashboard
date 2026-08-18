@@ -121,9 +121,9 @@ export default function DashboardPage({ gym, loadGym, userId }) {
         style={{
           textAlign: 'center',
           padding: 60,
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 20,
-          border: '1px solid rgba(255,255,255,0.08)',
+          border: '1px solid var(--border)',
         }}
       >
         <div
@@ -141,8 +141,8 @@ export default function DashboardPage({ gym, loadGym, userId }) {
         >
           <GymIcon size={32} color="#F5C842" />
         </div>
-        <h2 style={{ color: 'white', marginBottom: 8 }}>Complete Your Gym Profile</h2>
-        <p style={{ color: '#6B7B99', marginBottom: 24 }}>
+        <h2 style={{ color: 'var(--text-primary)', marginBottom: 8 }}>Complete Your Gym Profile</h2>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: 24 }}>
           Set up your gym profile to start receiving bookings on Sankofa Fit
         </p>
         <Link
@@ -224,7 +224,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
         <div>
           <h1
             style={{
-              color: 'white',
+              color: 'var(--text-primary)',
               fontSize: 24,
               fontWeight: 900,
               margin: 0,
@@ -232,7 +232,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
           >
             Welcome back!
           </h1>
-          <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>
+          <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>
             {gym.name} · {gym.city}
           </p>
         </div>
@@ -303,7 +303,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
             </div>
             <div
               style={{
-                color: '#6B7B99',
+                color: 'var(--text-secondary)',
                 fontSize: 13,
                 lineHeight: 1.6,
               }}
@@ -320,7 +320,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
                   border: '1px solid rgba(255,255,255,0.2)',
                   borderRadius: 8,
                   padding: '8px 16px',
-                  color: '#6B7B99',
+                  color: 'var(--text-secondary)',
                   fontSize: 12,
                   cursor: 'pointer',
                   marginTop: 12,
@@ -345,10 +345,10 @@ export default function DashboardPage({ gym, loadGym, userId }) {
           <div
             key={i}
             style={{
-              backgroundColor: 'rgba(27,47,107,0.4)',
+              backgroundColor: 'var(--bg-card)',
               borderRadius: 16,
               padding: '20px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--border)',
               transition: 'border-color 0.2s, transform 0.2s',
               cursor: 'default',
             }}
@@ -401,7 +401,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
             </div>
             <div
               style={{
-                color: 'white',
+                color: 'var(--text-primary)',
                 fontSize: 13,
                 fontWeight: 700,
                 marginBottom: 2,
@@ -409,16 +409,16 @@ export default function DashboardPage({ gym, loadGym, userId }) {
             >
               {card.label}
             </div>
-            <div style={{ color: '#6B7B99', fontSize: 11 }}>{card.sub}</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: 11 }}>{card.sub}</div>
           </div>
         ))}
       </div>
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 20,
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid var(--border)',
           overflow: 'hidden',
         }}
       >
@@ -433,7 +433,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
         >
           <h2
             style={{
-              color: 'white',
+              color: 'var(--text-primary)',
               fontSize: 16,
               fontWeight: 800,
               margin: 0,
@@ -470,7 +470,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
             >
               <BookingIcon size={28} color="#6B7B99" />
             </div>
-            <p style={{ color: '#6B7B99' }}>
+            <p style={{ color: 'var(--text-secondary)' }}>
               No bookings yet. Once your gym is live on Sankofa Fit, bookings will appear here.
             </p>
           </div>
@@ -490,7 +490,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
                       <th
                         key={h}
                         style={{
-                          color: '#6B7B99',
+                          color: 'var(--text-secondary)',
                           fontSize: 10,
                           fontWeight: 700,
                           letterSpacing: 1,
@@ -514,7 +514,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
                     }}
                   >
                     <td style={tdStyle}>{booking.class_name || 'Drop-in'}</td>
-                    <td style={{ ...tdStyle, color: '#6B7B99' }}>
+                    <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>
                       {formatDate(booking.booking_date)}
                       {booking.class_time && ` · ${booking.class_time}`}
                     </td>
@@ -522,7 +522,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
                     <td style={{ ...tdStyle, color: '#30D158', fontWeight: 700 }}>
                       GHS {((booking.amount_ghs || 0) * 0.85).toFixed(2)}
                     </td>
-                    <td style={{ ...tdStyle, color: '#6B7B99', fontSize: 11 }}>
+                    <td style={{ ...tdStyle, color: 'var(--text-secondary)', fontSize: 11 }}>
                       {booking.booking_reference || '—'}
                     </td>
                     <td style={tdStyle}>
@@ -551,7 +551,7 @@ export default function DashboardPage({ gym, loadGym, userId }) {
 }
 
 const tdStyle = {
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 13,
   padding: '13px 16px',
 };

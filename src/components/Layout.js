@@ -25,7 +25,7 @@ export default function Layout({ children, gym, session }) {
       style={{
         display: 'flex',
         minHeight: '100vh',
-        backgroundColor: '#080C1C',
+        backgroundColor: 'var(--bg-main)',
         position: 'relative',
       }}
     >
@@ -60,6 +60,8 @@ export default function Layout({ children, gym, session }) {
           transition: 'margin-left 0.3s ease',
           minHeight: '100vh',
           width: '100%',
+          backgroundColor: 'var(--bg-main)',
+          overflow: 'auto',
         }}
       >
         <Header
@@ -75,6 +77,7 @@ export default function Layout({ children, gym, session }) {
             overflowY: 'auto',
             overflowX: 'hidden',
             width: '100%',
+            backgroundColor: 'var(--bg-main)',
           }}
         >
           {children}

@@ -45,16 +45,16 @@ export default function SettingsPage({ session }) {
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ color: 'white', fontSize: 24, fontWeight: 900, margin: 0 }}>Settings</h1>
-        <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>Manage your account</p>
+        <h1 style={{ color: 'var(--text-primary)', fontSize: 24, fontWeight: 900, margin: 0 }}>Settings</h1>
+        <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>Manage your account</p>
       </div>
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 16,
           padding: 24,
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid var(--border)',
           marginBottom: 20,
         }}
       >
@@ -70,22 +70,22 @@ export default function SettingsPage({ session }) {
         >
           Account Information
         </h3>
-        <div style={{ color: '#6B7B99', fontSize: 13 }}>
-          <strong style={{ color: 'white' }}>Email: </strong>
+        <div style={{ color: 'var(--text-secondary)', fontSize: 13 }}>
+          <strong style={{ color: 'var(--text-primary)' }}>Email: </strong>
           {session?.user?.email}
         </div>
-        <div style={{ color: '#6B7B99', fontSize: 13, marginTop: 8 }}>
-          <strong style={{ color: 'white' }}>Account ID: </strong>
+        <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 8 }}>
+          <strong style={{ color: 'var(--text-primary)' }}>Account ID: </strong>
           {session?.user?.id?.slice(0, 8)}...
         </div>
       </div>
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 16,
           padding: 24,
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid var(--border)',
           marginBottom: 20,
         }}
       >
@@ -183,10 +183,10 @@ export default function SettingsPage({ session }) {
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 16,
           padding: 24,
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid var(--border)',
           marginBottom: 20,
         }}
       >
@@ -202,7 +202,7 @@ export default function SettingsPage({ session }) {
         >
           Support
         </h3>
-        <p style={{ color: '#6B7B99', fontSize: 13, lineHeight: 1.6, marginBottom: 16 }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.6, marginBottom: 16 }}>
           Need help? Contact Sankofa Fit support.
         </p>
         <a
@@ -249,7 +249,7 @@ export default function SettingsPage({ session }) {
 
 const labelStyle = {
   display: 'block',
-  color: '#6B7B99',
+  color: 'var(--text-secondary)',
   fontSize: 10,
   fontWeight: 700,
   letterSpacing: 1,
@@ -259,11 +259,11 @@ const labelStyle = {
 
 const inputStyle = {
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  backgroundColor: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
   borderRadius: 10,
   padding: '11px 14px',
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 14,
   outline: 'none',
   boxSizing: 'border-box',

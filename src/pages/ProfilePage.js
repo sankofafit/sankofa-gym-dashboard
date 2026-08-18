@@ -161,8 +161,8 @@ export default function ProfilePage({ gym, setGym, userId }) {
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ color: 'white', fontSize: 24, fontWeight: 900, margin: 0 }}>Gym Profile</h1>
-        <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>
+        <h1 style={{ color: 'var(--text-primary)', fontSize: 24, fontWeight: 900, margin: 0 }}>Gym Profile</h1>
+        <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>
           This information appears on the Sankofa Fit app
         </p>
       </div>
@@ -227,7 +227,7 @@ export default function ProfilePage({ gym, setGym, userId }) {
             />
             <p
               style={{
-                color: '#6B7B99',
+                color: 'var(--text-secondary)',
                 fontSize: 12,
                 marginTop: 12,
                 lineHeight: 1.5,
@@ -339,7 +339,7 @@ export default function ProfilePage({ gym, setGym, userId }) {
             />
             <div
               style={{
-                color: '#6B7B99',
+                color: 'var(--text-secondary)',
                 fontSize: 11,
                 marginTop: 6,
                 lineHeight: 1.5,
@@ -352,7 +352,7 @@ export default function ProfilePage({ gym, setGym, userId }) {
         </Section>
 
         <Section title="Amenities & Facilities" icon={CheckIcon}>
-          <p style={{ color: '#6B7B99', fontSize: 13, marginBottom: 16 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 13, marginBottom: 16 }}>
             Select all amenities available at your gym
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -390,7 +390,7 @@ export default function ProfilePage({ gym, setGym, userId }) {
         <Section title="Opening Hours" icon={TimeIcon}>
           <p
             style={{
-              color: '#6B7B99',
+              color: 'var(--text-secondary)',
               fontSize: 13,
               marginBottom: 16,
             }}
@@ -411,14 +411,14 @@ export default function ProfilePage({ gym, setGym, userId }) {
                   gap: 12,
                   marginBottom: 12,
                   padding: '12px 16px',
-                  backgroundColor: 'rgba(27,47,107,0.3)',
+                  backgroundColor: 'var(--bg-card)',
                   borderRadius: 12,
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  border: '1px solid var(--border)',
                 }}
               >
                 <div
                   style={{
-                    color: 'white',
+                    color: 'var(--text-primary)',
                     fontSize: 13,
                     fontWeight: 700,
                     width: 100,
@@ -466,11 +466,11 @@ export default function ProfilePage({ gym, setGym, userId }) {
                     placeholder="e.g. 6:00 AM - 10:00 PM"
                     style={{
                       flex: 1,
-                      backgroundColor: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      backgroundColor: 'var(--bg-input)',
+                      border: '1px solid var(--border-input)',
                       borderRadius: 8,
                       padding: '8px 12px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       fontSize: 13,
                       outline: 'none',
                       boxSizing: 'border-box',
@@ -558,7 +558,7 @@ export default function ProfilePage({ gym, setGym, userId }) {
           >
             <span
               style={{
-                color: '#6B7B99',
+                color: 'var(--text-secondary)',
                 fontSize: 12,
                 alignSelf: 'center',
                 marginRight: 4,
@@ -660,7 +660,7 @@ export default function ProfilePage({ gym, setGym, userId }) {
         <Section title="Payout Details" icon={MoneyIcon}>
           <p
             style={{
-              color: '#6B7B99',
+              color: 'var(--text-secondary)',
               fontSize: 13,
               marginBottom: 16,
               lineHeight: 1.5,
@@ -749,11 +749,11 @@ function Section({ title, icon: Icon, children }) {
   return (
     <div
       style={{
-        backgroundColor: 'rgba(27,47,107,0.3)',
+        backgroundColor: 'var(--bg-card)',
         borderRadius: 16,
         padding: 24,
         marginBottom: 20,
-        border: '1px solid rgba(255,255,255,0.06)',
+        border: '1px solid var(--border)',
       }}
     >
       <div
@@ -799,7 +799,7 @@ function Section({ title, icon: Icon, children }) {
 
 const labelStyle = {
   display: 'block',
-  color: '#6B7B99',
+  color: 'var(--text-secondary)',
   fontSize: 10,
   fontWeight: 700,
   letterSpacing: 1,
@@ -809,11 +809,11 @@ const labelStyle = {
 
 const inputStyle = {
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  backgroundColor: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
   borderRadius: 10,
   padding: '11px 14px',
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 14,
   outline: 'none',
   boxSizing: 'border-box',

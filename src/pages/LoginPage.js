@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { RiSunLine, RiMoonLine } from 'react-icons/ri';
 import { supabase } from '../lib/supabase';
+import useTheme from '../hooks/useTheme';
 import {
   TrendingIcon,
   GymIcon,
@@ -11,6 +13,7 @@ import {
 } from '../components/Icons';
 
 export default function LoginPage() {
+  const { theme, toggleTheme } = useTheme();
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -125,7 +128,7 @@ export default function LoginPage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#080C1C',
+        backgroundColor: 'var(--bg-main)',
         backgroundImage:
           'radial-gradient(ellipse at top, rgba(27,47,107,0.5) 0%, transparent 60%)',
         display: 'flex',
@@ -133,8 +136,41 @@ export default function LoginPage() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '40px 20px',
+        position: 'relative',
       }}
     >
+      <div style={{ position: 'absolute', top: 20, right: 20 }}>
+        <button
+          type="button"
+          onClick={toggleTheme}
+          style={{
+            backgroundColor:
+              theme === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(27,47,107,0.08)',
+            border: `1px solid ${
+              theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(27,47,107,0.15)'
+            }`,
+            borderRadius: 50,
+            padding: '8px 16px',
+            cursor: 'pointer',
+            color: theme === 'dark' ? '#F5C842' : '#1B2F6B',
+            fontSize: 13,
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}
+        >
+          {theme === 'dark' ? (
+            <>
+              <RiSunLine size={16} /> Light
+            </>
+          ) : (
+            <>
+              <RiMoonLine size={16} /> Dark
+            </>
+          )}
+        </button>
+      </div>
       <div
         style={{
           textAlign: 'center',
@@ -159,16 +195,17 @@ export default function LoginPage() {
         style={{
           width: '100%',
           maxWidth: 460,
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 24,
           padding: '36px 32px',
-          border: '1px solid rgba(255,255,255,0.08)',
+          border: '1px solid var(--border)',
+          boxShadow: '0 24px 64px var(--shadow)',
           backdropFilter: 'blur(10px)',
         }}
       >
         <h2
           style={{
-            color: 'white',
+            color: 'var(--text-primary)',
             fontSize: 22,
             fontWeight: 900,
             margin: '0 0 6px 0',
@@ -190,7 +227,7 @@ export default function LoginPage() {
         </h2>
         <p
           style={{
-            color: '#6B7B99',
+            color: 'var(--text-secondary)',
             fontSize: 13,
             lineHeight: 1.5,
             textAlign: 'center',
@@ -359,7 +396,7 @@ export default function LoginPage() {
           style={{
             textAlign: 'center',
             marginTop: 20,
-            color: '#6B7B99',
+            color: 'var(--text-secondary)',
             fontSize: 13,
           }}
         >
@@ -434,9 +471,9 @@ export default function LoginPage() {
               alignItems: 'center',
               gap: 12,
               padding: '14px 18px',
-              backgroundColor: 'rgba(27,47,107,0.3)',
+              backgroundColor: 'var(--bg-card)',
               borderRadius: 14,
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--border)',
               flex: '1 1 160px',
               maxWidth: 200,
             }}
@@ -459,7 +496,7 @@ export default function LoginPage() {
             <div>
               <div
                 style={{
-                  color: 'white',
+                  color: 'var(--text-primary)',
                   fontSize: 13,
                   fontWeight: 700,
                   marginBottom: 2,
@@ -467,7 +504,7 @@ export default function LoginPage() {
               >
                 {benefit.title}
               </div>
-              <div style={{ color: '#6B7B99', fontSize: 11 }}>{benefit.desc}</div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: 11 }}>{benefit.desc}</div>
             </div>
           </div>
         ))}
@@ -489,7 +526,7 @@ export default function LoginPage() {
 
 const labelStyle = {
   display: 'block',
-  color: '#6B7B99',
+  color: 'var(--text-secondary)',
   fontSize: 11,
   fontWeight: 700,
   letterSpacing: 1,
@@ -499,11 +536,11 @@ const labelStyle = {
 
 const inputStyle = {
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  backgroundColor: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
   borderRadius: 12,
   padding: '13px 16px',
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 14,
   outline: 'none',
   boxSizing: 'border-box',

@@ -234,7 +234,7 @@ export default function ClassesPage({ gym, userId }) {
   };
 
   if (!gym) {
-    return <p style={{ color: '#6B7B99' }}>Complete your gym profile first.</p>;
+    return <p style={{ color: 'var(--text-secondary)' }}>Complete your gym profile first.</p>;
   }
 
   return (
@@ -250,10 +250,10 @@ export default function ClassesPage({ gym, userId }) {
         }}
       >
         <div>
-          <h1 style={{ color: 'white', fontSize: 24, fontWeight: 900, margin: 0 }}>
+          <h1 style={{ color: 'var(--text-primary)', fontSize: 24, fontWeight: 900, margin: 0 }}>
             Classes & Timetable
           </h1>
-          <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>
+          <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>
             {classes.length} class{classes.length !== 1 ? 'es' : ''} listed
           </p>
         </div>
@@ -285,7 +285,7 @@ export default function ClassesPage({ gym, userId }) {
       {showForm && (
         <div
           style={{
-            backgroundColor: 'rgba(27,47,107,0.4)',
+            backgroundColor: 'var(--bg-card)',
             borderRadius: 20,
             padding: 28,
             marginBottom: 24,
@@ -300,7 +300,7 @@ export default function ClassesPage({ gym, userId }) {
               marginBottom: 24,
             }}
           >
-            <h2 style={{ color: 'white', fontSize: 18, fontWeight: 800, margin: 0 }}>
+            <h2 style={{ color: 'var(--text-primary)', fontSize: 18, fontWeight: 800, margin: 0 }}>
               {editingClass ? 'Edit Class' : 'New Class'}
             </h2>
             <button
@@ -312,7 +312,7 @@ export default function ClassesPage({ gym, userId }) {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#6B7B99',
+                color: 'var(--text-secondary)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -514,7 +514,7 @@ export default function ClassesPage({ gym, userId }) {
                     />
                     <div
                       style={{
-                        color: '#6B7B99',
+                        color: 'var(--text-secondary)',
                         fontSize: 11,
                         marginTop: 6,
                       }}
@@ -596,7 +596,7 @@ export default function ClassesPage({ gym, userId }) {
                     padding: 16,
                     border: '1px dashed rgba(255,255,255,0.1)',
                     borderRadius: 10,
-                    color: '#6B7B99',
+                    color: 'var(--text-secondary)',
                     fontSize: 13,
                   }}
                 >
@@ -666,7 +666,7 @@ export default function ClassesPage({ gym, userId }) {
                   border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: 10,
                   padding: '11px 20px',
-                  color: '#6B7B99',
+                  color: 'var(--text-secondary)',
                   fontSize: 14,
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -697,15 +697,15 @@ export default function ClassesPage({ gym, userId }) {
       )}
 
       {loading ? (
-        <p style={{ color: '#6B7B99' }}>Loading classes...</p>
+        <p style={{ color: 'var(--text-secondary)' }}>Loading classes...</p>
       ) : classes.length === 0 ? (
         <div
           style={{
             textAlign: 'center',
             padding: 60,
-            backgroundColor: 'rgba(27,47,107,0.3)',
+            backgroundColor: 'var(--bg-card)',
             borderRadius: 20,
-            border: '1px solid rgba(255,255,255,0.06)',
+            border: '1px solid var(--border)',
           }}
         >
           <div
@@ -722,8 +722,8 @@ export default function ClassesPage({ gym, userId }) {
           >
             <GymIcon size={32} color="#F5C842" />
           </div>
-          <h3 style={{ color: 'white', marginBottom: 8 }}>No classes yet</h3>
-          <p style={{ color: '#6B7B99', marginBottom: 24 }}>
+          <h3 style={{ color: 'var(--text-primary)', marginBottom: 8 }}>No classes yet</h3>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 24 }}>
             Add your first class to start receiving bookings
           </p>
           <button
@@ -759,7 +759,7 @@ export default function ClassesPage({ gym, userId }) {
             <div
               key={cls.id}
               style={{
-                backgroundColor: 'rgba(27,47,107,0.4)',
+                backgroundColor: 'var(--bg-card)',
                 borderRadius: 16,
                 border: `1px solid ${
                   cls.is_active ? 'rgba(255,255,255,0.08)' : 'rgba(239,68,68,0.2)'
@@ -780,7 +780,7 @@ export default function ClassesPage({ gym, userId }) {
                 <div>
                   <div
                     style={{
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       fontSize: 16,
                       fontWeight: 800,
                       marginBottom: 4,
@@ -812,7 +812,7 @@ export default function ClassesPage({ gym, userId }) {
                 {cls.trainer_name && (
                   <div
                     style={{
-                      color: '#6B7B99',
+                      color: 'var(--text-secondary)',
                       fontSize: 13,
                       marginBottom: 8,
                       display: 'flex',
@@ -827,7 +827,7 @@ export default function ClassesPage({ gym, userId }) {
                 {cls.description && (
                   <div
                     style={{
-                      color: '#6B7B99',
+                      color: 'var(--text-secondary)',
                       fontSize: 12,
                       marginBottom: 10,
                       lineHeight: 1.5,
@@ -838,7 +838,7 @@ export default function ClassesPage({ gym, userId }) {
                 )}
                 <div
                   style={{
-                    color: '#6B7B99',
+                    color: 'var(--text-secondary)',
                     fontSize: 12,
                     display: 'flex',
                     alignItems: 'center',
@@ -866,7 +866,7 @@ export default function ClassesPage({ gym, userId }) {
                       <div
                         key={i}
                         style={{
-                          color: 'white',
+                          color: 'var(--text-primary)',
                           fontSize: 12,
                           marginBottom: 3,
                           display: 'flex',
@@ -890,7 +890,7 @@ export default function ClassesPage({ gym, userId }) {
               >
                 <div
                   style={{
-                    color: '#6B7B99',
+                    color: 'var(--text-secondary)',
                     fontSize: 10,
                     fontWeight: 700,
                     letterSpacing: 1,
@@ -991,7 +991,7 @@ export default function ClassesPage({ gym, userId }) {
 
 const labelStyle = {
   display: 'block',
-  color: '#6B7B99',
+  color: 'var(--text-secondary)',
   fontSize: 10,
   fontWeight: 700,
   letterSpacing: 1,
@@ -1001,11 +1001,11 @@ const labelStyle = {
 
 const inputStyle = {
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  backgroundColor: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
   borderRadius: 10,
   padding: '11px 14px',
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 14,
   outline: 'none',
   boxSizing: 'border-box',

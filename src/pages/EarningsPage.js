@@ -171,8 +171,8 @@ export default function EarningsPage({ gym }) {
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ color: 'white', fontSize: 24, fontWeight: 900, margin: 0 }}>Earnings</h1>
-        <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>
+        <h1 style={{ color: 'var(--text-primary)', fontSize: 24, fontWeight: 900, margin: 0 }}>Earnings</h1>
+        <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>
           Your revenue breakdown from Sankofa Fit
         </p>
       </div>
@@ -188,14 +188,14 @@ export default function EarningsPage({ gym }) {
           alignItems: 'center',
           gap: 12,
           fontSize: 13,
-          color: '#6B7B99',
+          color: 'var(--text-secondary)',
         }}
       >
         <StatusIcons.Info size={20} color="#F5C842" />
         <span>
           <strong style={{ color: '#F5C842' }}>Commission structure: </strong>
-          Drop-in / Class bookings: you keep <strong style={{ color: 'white' }}>85%</strong> ·
-          Memberships: you keep <strong style={{ color: 'white' }}>90%</strong>
+          Drop-in / Class bookings: you keep <strong style={{ color: 'var(--text-primary)' }}>85%</strong> ·
+          Memberships: you keep <strong style={{ color: 'var(--text-primary)' }}>90%</strong>
         </span>
       </div>
 
@@ -211,10 +211,10 @@ export default function EarningsPage({ gym }) {
           <div
             key={i}
             style={{
-              backgroundColor: 'rgba(27,47,107,0.4)',
+              backgroundColor: 'var(--bg-card)',
               borderRadius: 16,
               padding: 20,
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--border)',
             }}
           >
             <div
@@ -244,7 +244,7 @@ export default function EarningsPage({ gym }) {
             </div>
             <div
               style={{
-                color: 'white',
+                color: 'var(--text-primary)',
                 fontSize: 13,
                 fontWeight: 700,
                 marginBottom: 2,
@@ -252,22 +252,22 @@ export default function EarningsPage({ gym }) {
             >
               {card.label}
             </div>
-            <div style={{ color: '#6B7B99', fontSize: 11 }}>{card.sub}</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: 11 }}>{card.sub}</div>
           </div>
         ))}
       </div>
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 20,
           padding: 24,
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid var(--border)',
         }}
       >
         <h2
           style={{
-            color: 'white',
+            color: 'var(--text-primary)',
             fontSize: 16,
             fontWeight: 800,
             marginBottom: 20,
@@ -277,7 +277,7 @@ export default function EarningsPage({ gym }) {
         </h2>
 
         {earnings.byMonth.length === 0 ? (
-          <p style={{ color: '#6B7B99', textAlign: 'center', padding: 20 }}>
+          <p style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: 20 }}>
             No earnings data yet. Earnings will appear here once bookings are made.
           </p>
         ) : (
@@ -295,7 +295,7 @@ export default function EarningsPage({ gym }) {
                   <th
                     key={h}
                     style={{
-                      color: '#6B7B99',
+                      color: 'var(--text-secondary)',
                       fontSize: 10,
                       fontWeight: 700,
                       letterSpacing: 1,
@@ -336,17 +336,17 @@ export default function EarningsPage({ gym }) {
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 14,
           padding: '16px 20px',
           marginTop: 20,
-          border: '1px solid rgba(255,255,255,0.06)',
-          color: '#6B7B99',
+          border: '1px solid var(--border)',
+          color: 'var(--text-secondary)',
           fontSize: 13,
           lineHeight: 1.6,
         }}
       >
-        <strong style={{ color: 'white', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+        <strong style={{ color: 'var(--text-primary)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
           <MembershipIcon size={16} color="#F5C842" />
           Payout Information:
         </strong>{' '}
@@ -362,7 +362,7 @@ export default function EarningsPage({ gym }) {
 }
 
 const tdStyle = {
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 13,
   padding: '12px',
 };

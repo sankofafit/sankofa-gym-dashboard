@@ -114,7 +114,7 @@ export default function MembershipsPage({ gym }) {
   };
 
   if (!gym) {
-    return <p style={{ color: '#6B7B99' }}>Complete your gym profile first.</p>;
+    return <p style={{ color: 'var(--text-secondary)' }}>Complete your gym profile first.</p>;
   }
 
   return (
@@ -130,10 +130,10 @@ export default function MembershipsPage({ gym }) {
         }}
       >
         <div>
-          <h1 style={{ color: 'white', fontSize: 24, fontWeight: 900, margin: 0 }}>
+          <h1 style={{ color: 'var(--text-primary)', fontSize: 24, fontWeight: 900, margin: 0 }}>
             Membership Plans
           </h1>
-          <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>
+          <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>
             Create plans that users can subscribe to
           </p>
         </div>
@@ -165,7 +165,7 @@ export default function MembershipsPage({ gym }) {
       {showForm && (
         <div
           style={{
-            backgroundColor: 'rgba(27,47,107,0.4)',
+            backgroundColor: 'var(--bg-card)',
             borderRadius: 20,
             padding: 28,
             marginBottom: 24,
@@ -180,7 +180,7 @@ export default function MembershipsPage({ gym }) {
               marginBottom: 24,
             }}
           >
-            <h2 style={{ color: 'white', fontSize: 18, fontWeight: 800, margin: 0 }}>
+            <h2 style={{ color: 'var(--text-primary)', fontSize: 18, fontWeight: 800, margin: 0 }}>
               {editingPlan ? 'Edit Plan' : 'New Membership Plan'}
             </h2>
             <button
@@ -192,7 +192,7 @@ export default function MembershipsPage({ gym }) {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#6B7B99',
+                color: 'var(--text-secondary)',
                 cursor: 'pointer',
                 display: 'flex',
                 padding: 4,
@@ -350,7 +350,7 @@ export default function MembershipsPage({ gym }) {
                   border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: 10,
                   padding: '11px 20px',
-                  color: '#6B7B99',
+                  color: 'var(--text-secondary)',
                   fontSize: 14,
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -381,15 +381,15 @@ export default function MembershipsPage({ gym }) {
       )}
 
       {loading ? (
-        <p style={{ color: '#6B7B99' }}>Loading plans...</p>
+        <p style={{ color: 'var(--text-secondary)' }}>Loading plans...</p>
       ) : plans.length === 0 && !showForm ? (
         <div
           style={{
             textAlign: 'center',
             padding: 60,
-            backgroundColor: 'rgba(27,47,107,0.3)',
+            backgroundColor: 'var(--bg-card)',
             borderRadius: 20,
-            border: '1px solid rgba(255,255,255,0.06)',
+            border: '1px solid var(--border)',
           }}
         >
           <div
@@ -406,8 +406,8 @@ export default function MembershipsPage({ gym }) {
           >
             <MembershipIcon size={32} color="#F5C842" />
           </div>
-          <h3 style={{ color: 'white', marginBottom: 8 }}>No membership plans yet</h3>
-          <p style={{ color: '#6B7B99', marginBottom: 24 }}>Create membership plans for your gym</p>
+          <h3 style={{ color: 'var(--text-primary)', marginBottom: 8 }}>No membership plans yet</h3>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 24 }}>Create membership plans for your gym</p>
           <button
             type="button"
             onClick={() => setShowForm(true)}
@@ -437,7 +437,7 @@ export default function MembershipsPage({ gym }) {
             <div
               key={plan.id}
               style={{
-                backgroundColor: 'rgba(27,47,107,0.4)',
+                backgroundColor: 'var(--bg-card)',
                 borderRadius: 16,
                 border: '1px solid rgba(245,200,66,0.2)',
                 overflow: 'hidden',
@@ -460,7 +460,7 @@ export default function MembershipsPage({ gym }) {
                   <div>
                     <div
                       style={{
-                        color: 'white',
+                        color: 'var(--text-primary)',
                         fontSize: 18,
                         fontWeight: 800,
                         marginBottom: 4,
@@ -468,7 +468,7 @@ export default function MembershipsPage({ gym }) {
                     >
                       {plan.name}
                     </div>
-                    <div style={{ color: '#6B7B99', fontSize: 12 }}>{plan.duration_days} days</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{plan.duration_days} days</div>
                   </div>
                   <div style={{ color: '#F5C842', fontSize: 24, fontWeight: 900 }}>
                     GHS {plan.price_ghs}
@@ -477,7 +477,7 @@ export default function MembershipsPage({ gym }) {
                 {plan.description && (
                   <p
                     style={{
-                      color: '#6B7B99',
+                      color: 'var(--text-secondary)',
                       fontSize: 12,
                       marginTop: 10,
                       lineHeight: 1.5,
@@ -494,7 +494,7 @@ export default function MembershipsPage({ gym }) {
                     <div
                       key={i}
                       style={{
-                        color: '#6B7B99',
+                        color: 'var(--text-secondary)',
                         fontSize: 12,
                         marginBottom: 6,
                         display: 'flex',
@@ -572,7 +572,7 @@ export default function MembershipsPage({ gym }) {
 
 const labelStyle = {
   display: 'block',
-  color: '#6B7B99',
+  color: 'var(--text-secondary)',
   fontSize: 10,
   fontWeight: 700,
   letterSpacing: 1,
@@ -582,11 +582,11 @@ const labelStyle = {
 
 const inputStyle = {
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  backgroundColor: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
   borderRadius: 10,
   padding: '11px 14px',
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 14,
   outline: 'none',
   boxSizing: 'border-box',

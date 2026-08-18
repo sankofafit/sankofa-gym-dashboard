@@ -85,8 +85,8 @@ export default function BookingsPage({ gym }) {
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ color: 'white', fontSize: 24, fontWeight: 900, margin: 0 }}>Bookings</h1>
-        <p style={{ color: '#6B7B99', marginTop: 4, fontSize: 14 }}>
+        <h1 style={{ color: 'var(--text-primary)', fontSize: 24, fontWeight: 900, margin: 0 }}>Bookings</h1>
+        <p style={{ color: 'var(--text-secondary)', marginTop: 4, fontSize: 14 }}>
           {bookings.length} class bookings · {memberships.length} memberships
         </p>
       </div>
@@ -95,7 +95,7 @@ export default function BookingsPage({ gym }) {
         style={{
           display: 'flex',
           gap: 4,
-          backgroundColor: 'rgba(27,47,107,0.4)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 12,
           padding: 4,
           marginBottom: 20,
@@ -133,11 +133,11 @@ export default function BookingsPage({ gym }) {
         placeholder="Search by class name or reference..."
         style={{
           width: '100%',
-          backgroundColor: 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(255,255,255,0.1)',
+          backgroundColor: 'var(--bg-input)',
+          border: '1px solid var(--border-input)',
           borderRadius: 12,
           padding: '12px 16px',
-          color: 'white',
+          color: 'var(--text-primary)',
           fontSize: 14,
           outline: 'none',
           boxSizing: 'border-box',
@@ -147,14 +147,14 @@ export default function BookingsPage({ gym }) {
 
       <div
         style={{
-          backgroundColor: 'rgba(27,47,107,0.3)',
+          backgroundColor: 'var(--bg-card)',
           borderRadius: 20,
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid var(--border)',
           overflow: 'hidden',
         }}
       >
         {loading ? (
-          <p style={{ color: '#6B7B99', textAlign: 'center', padding: 40 }}>Loading bookings...</p>
+          <p style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: 40 }}>Loading bookings...</p>
         ) : filtered.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60 }}>
             <div
@@ -171,7 +171,7 @@ export default function BookingsPage({ gym }) {
             >
               <BookingIcon size={28} color="#6B7B99" />
             </div>
-            <p style={{ color: '#6B7B99' }}>
+            <p style={{ color: 'var(--text-secondary)' }}>
               {search
                 ? 'No bookings match your search'
                 : `No ${activeTab} bookings yet`}
@@ -192,7 +192,7 @@ export default function BookingsPage({ gym }) {
                     <th
                       key={h}
                       style={{
-                        color: '#6B7B99',
+                        color: 'var(--text-secondary)',
                         fontSize: 10,
                         fontWeight: 700,
                         letterSpacing: 1,
@@ -215,10 +215,10 @@ export default function BookingsPage({ gym }) {
                     }}
                   >
                     <td style={tdStyle}>{item.class_name || item.membership_type || '—'}</td>
-                    <td style={{ ...tdStyle, color: '#6B7B99' }}>
+                    <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>
                       {formatDate(item.booking_date || item.start_date)}
                     </td>
-                    <td style={{ ...tdStyle, color: '#6B7B99' }}>
+                    <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>
                       {activeTab === 'classes'
                         ? item.class_time || '—'
                         : formatDate(item.end_date)}
@@ -227,7 +227,7 @@ export default function BookingsPage({ gym }) {
                     <td style={{ ...tdStyle, color: '#30D158', fontWeight: 700 }}>
                       GHS {((item.amount_ghs || 0) * 0.85).toFixed(2)}
                     </td>
-                    <td style={{ ...tdStyle, color: '#6B7B99', fontSize: 11 }}>
+                    <td style={{ ...tdStyle, color: 'var(--text-secondary)', fontSize: 11 }}>
                       {item.booking_reference || item.membership_reference || '—'}
                     </td>
                     <td style={tdStyle}>
@@ -256,7 +256,7 @@ export default function BookingsPage({ gym }) {
 }
 
 const tdStyle = {
-  color: 'white',
+  color: 'var(--text-primary)',
   fontSize: 13,
   padding: '13px 16px',
 };

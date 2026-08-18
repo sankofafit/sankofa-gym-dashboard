@@ -150,7 +150,7 @@ export default function ImageUploader({
       <div style={{ marginBottom: 24 }}>
         <div
           style={{
-            color: '#6B7B99',
+            color: 'var(--text-secondary)',
             fontSize: 11,
             fontWeight: 700,
             letterSpacing: 1,
@@ -173,7 +173,7 @@ export default function ImageUploader({
             height: 200,
             borderRadius: 14,
             overflow: 'hidden',
-            backgroundColor: 'rgba(255,255,255,0.05)',
+            backgroundColor: 'var(--bg-input)',
             border: '2px dashed rgba(245,200,66,0.3)',
             marginBottom: 12,
             position: 'relative',
@@ -211,7 +211,7 @@ export default function ImageUploader({
               >
                 <span
                   style={{
-                    color: 'white',
+                    color: 'var(--text-primary)',
                     fontSize: 14,
                     fontWeight: 700,
                     backgroundColor: 'rgba(0,0,0,0.6)',
@@ -239,8 +239,8 @@ export default function ImageUploader({
               }}
             >
               <ImageIcon size={40} color="rgba(245,200,66,0.5)" />
-              <span style={{ color: '#6B7B99', fontSize: 14 }}>Click to upload cover photo</span>
-              <span style={{ color: '#6B7B99', fontSize: 12 }}>JPG, PNG up to 5MB</span>
+              <span style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Click to upload cover photo</span>
+              <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>JPG, PNG up to 5MB</span>
             </div>
           )}
         </div>
@@ -291,7 +291,7 @@ export default function ImageUploader({
       <div>
         <div
           style={{
-            color: '#6B7B99',
+            color: 'var(--text-secondary)',
             fontSize: 11,
             fontWeight: 700,
             letterSpacing: 1,
@@ -318,7 +318,7 @@ export default function ImageUploader({
                 borderRadius: 10,
                 overflow: 'hidden',
                 height: 120,
-                backgroundColor: 'rgba(255,255,255,0.05)',
+                backgroundColor: 'var(--bg-input)',
               }}
             >
               <img
@@ -346,7 +346,7 @@ export default function ImageUploader({
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: 'white',
+                  color: 'var(--text-primary)',
                   fontSize: 12,
                   fontWeight: 700,
                 }}
@@ -378,7 +378,7 @@ export default function ImageUploader({
               }}
             >
               <span style={{ fontSize: 24 }}>+</span>
-              <span style={{ color: '#6B7B99', fontSize: 11, textAlign: 'center' }}>Add Photo</span>
+              <span style={{ color: 'var(--text-secondary)', fontSize: 11, textAlign: 'center' }}>Add Photo</span>
             </div>
           )}
         </div>
@@ -404,11 +404,11 @@ export default function ImageUploader({
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading || images.length >= 10}
           style={{
-            backgroundColor: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: 'var(--bg-input)',
+            border: '1px solid var(--border-input)',
             borderRadius: 10,
             padding: '10px 20px',
-            color: '#6B7B99',
+            color: 'var(--text-secondary)',
             fontSize: 13,
             fontWeight: 600,
             cursor: 'pointer',
@@ -435,7 +435,7 @@ export default function ImageUploader({
           )}
         </button>
 
-        <div style={{ color: '#6B7B99', fontSize: 11, marginTop: 8 }}>
+        <div style={{ color: 'var(--text-secondary)', fontSize: 11, marginTop: 8 }}>
           These photos appear in your gym profile on the Sankofa Fit app. Add photos of your
           equipment, classes and facilities.
         </div>
