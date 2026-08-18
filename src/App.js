@@ -18,18 +18,29 @@ export default function App() {
 
   const loadGym = async (userId) => {
     try {
+      console.log('Loading gym for user:', userId);
+
       const { data, error } = await supabase
         .from('gyms')
         .select('*')
         .eq('owner_id', userId)
         .single();
 
-      if (error && error.code !== 'PGRST116') {
-        console.log('Load gym error:', error);
+      console.log('Gym data:', data);
+      console.log('Gym error:', error);
+      console.log('Is approved:', data?.is_approved);
+
+      if (error) {
+        console.log('No gym found for user');
+        setGym(null);
+      } else {
+        setGym({
+          ...data,
+          is_approved: data.is_approved === true || data.is_approved === 'true',
+        });
       }
-      setGym(data || null);
     } catch (e) {
-      console.log('Gym load error:', e);
+      console.log('loadGym error:', e);
     } finally {
       setLoading(false);
     }
@@ -112,7 +123,7 @@ export default function App() {
     <Router>
       <Layout gym={gym} session={session} loadGym={loadGym}>
         <Routes>
-          <Route path="/" element={<DashboardPage gym={gym} />} />
+          <Route path="/" element={<DashboardPage gym={gym} loadGym={loadGym} userId={session.user.id} />} />
           <Route path="/classes" element={<ClassesPage gym={gym} userId={session.user.id} />} />
           <Route path="/memberships" element={<MembershipsPage gym={gym} />} />
           <Route path="/bookings" element={<BookingsPage gym={gym} />} />

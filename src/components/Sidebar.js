@@ -129,10 +129,10 @@ export default function Sidebar({ gym, isOpen, isMobile, onClose }) {
                 style={{
                   fontSize: 11,
                   fontWeight: 700,
-                  color: gym.is_approved ? '#30D158' : '#F5C842',
+                  color: gym.is_approved === true ? '#30D158' : '#F5C842',
                 }}
               >
-                {gym.is_approved ? '● Live on App' : '● Pending Review'}
+                {gym.is_approved === true ? '● Live on App' : '● Pending Review'}
               </div>
             </div>
           </div>

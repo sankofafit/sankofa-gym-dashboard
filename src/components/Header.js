@@ -52,7 +52,7 @@ export default function Header({ gym, session, onMenuToggle, isMobile }) {
           minWidth: 0,
         }}
       >
-        {gym?.is_approved ? (
+        {gym?.is_approved === true ? (
           <div
             style={{
               display: 'flex',

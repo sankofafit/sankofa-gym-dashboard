@@ -11,7 +11,7 @@ import {
   StatusIcons,
 } from '../components/Icons';
 
-export default function DashboardPage({ gym }) {
+export default function DashboardPage({ gym, loadGym, userId }) {
   const [stats, setStats] = useState({
     todayBookings: 0,
     weekBookings: 0,
@@ -24,6 +24,10 @@ export default function DashboardPage({ gym }) {
   });
   const [recentBookings, setRecentBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const isApproved = gym?.is_approved === true;
+  const isPendingReview =
+    gym?.is_approved === false || gym?.is_approved === null;
 
   const loadStats = useCallback(async () => {
     if (!gym?.id) return;
@@ -224,29 +228,29 @@ export default function DashboardPage({ gym }) {
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            backgroundColor: gym.is_approved
+            backgroundColor: isApproved
               ? 'rgba(48,209,88,0.1)'
               : 'rgba(245,200,66,0.1)',
             border: `1px solid ${
-              gym.is_approved ? 'rgba(48,209,88,0.3)' : 'rgba(245,200,66,0.3)'
+              isApproved ? 'rgba(48,209,88,0.3)' : 'rgba(245,200,66,0.3)'
             }`,
             borderRadius: 10,
             padding: '8px 16px',
-            color: gym.is_approved ? '#30D158' : '#F5C842',
+            color: isApproved ? '#30D158' : '#F5C842',
             fontSize: 13,
             fontWeight: 700,
           }}
         >
-          {gym.is_approved ? (
+          {isApproved ? (
             <StatusIcons.Success size={16} />
           ) : (
             <StatusIcons.Warning size={16} />
           )}
-          {gym.is_approved ? 'Live on App' : 'Pending Review'}
+          {isApproved ? 'Live on App' : 'Pending Review'}
         </div>
       </div>
 
-      {!gym.is_approved && (
+      {isPendingReview ? (
         <div
           style={{
             backgroundColor: 'rgba(245,200,66,0.06)',
@@ -294,9 +298,27 @@ export default function DashboardPage({ gym }) {
               Sankofa Fit admin will review and approve your gym within 24-48 hours. In the
               meantime, you can set up your classes, membership plans and complete your profile.
             </div>
+            {loadGym && userId ? (
+              <button
+                type="button"
+                onClick={() => loadGym(userId)}
+                style={{
+                  backgroundColor: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 8,
+                  padding: '8px 16px',
+                  color: '#6B7B99',
+                  fontSize: 12,
+                  cursor: 'pointer',
+                  marginTop: 12,
+                }}
+              >
+                🔄 Refresh Status
+              </button>
+            ) : null}
           </div>
         </div>
-      )}
+      ) : null}
 
       <div
         style={{
